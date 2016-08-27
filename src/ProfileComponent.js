@@ -4,6 +4,7 @@ export default class ProfileComponent extends Component {
 
   constructor(props) {
     super(props);
+
 	this.state = {
 	  address: '台灣台中市....'
 	}
@@ -13,6 +14,9 @@ export default class ProfileComponent extends Component {
     this.setState({
 	  address: event.target.value
 	});
+
+	// change parent component state
+	this.props.changeTitle(event.target.value);
   }
 
   render() {
