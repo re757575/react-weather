@@ -59,7 +59,7 @@ export default class App extends Component {
         1668341: '台北'
       },
       {
-        1668341: '台中'
+        1668399: '台中'
       }
     ];
 
