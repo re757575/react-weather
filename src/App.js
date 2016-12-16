@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-
-export default class App extends Component {
+import { connect } from 'react-redux';
+import { getWeatherData } from './actions';
+class App extends Component {
 
   constructor(props) {
 
@@ -10,37 +11,22 @@ export default class App extends Component {
 
     this.state = {
       appTitle: 'React Weather',
-      selectedCity: null,
-      weatherData: null,
-      loadStatus: 'not load'
+      selectedCity: null
     };
 
-    this.getWeatherData = this.getWeatherData.bind(this);
-    this.changeCity = this.changeCity.bind(this);
+    this.handleChangeCity = this.handleChangeCity.bind(this);
+    this.handleGetWeather = this.handleGetWeather.bind(this);
   }
 
-  getWeatherData() {
+  handleChangeCity(e) {
+    console.log('handleChangeCity()');
+    const selectedCity = e.target.value;
+    this.setState({selectedCity});
+  }
 
-    console.log('getWeatherData()');
-
-    if (!this.state.selectedCity) {
-      return false;
-    }
-
-    const APPID = '3a494cb65411295b23e82358cf4f07f6';
-    let url = `http://api.openweathermap.org/data/2.5/weather?id=${this.state.selectedCity}&APPID=${APPID}`;
-
-    this.setState({loadStatus: 'loading...'});
-
-    fetch(url)
-      .then(response => response.json())
-      .then(json => this.setState({weatherData: json, loadStatus: 'loaded'}))
-      .catch(ex => console.log('parsing failed', ex) );
-  };
-
-  changeCity(e) {
-    console.log('changeCity()');
-    this.setState({selectedCity: e.target.value});
+  handleGetWeather() {
+    console.log('handleGetWeather()');
+    this.props.getWeatherData(this.state.selectedCity);
   }
 
   render() {
@@ -49,7 +35,7 @@ export default class App extends Component {
 
     const style = {color: 'red'};
 
-    const data = this.state.weatherData;
+    const { weatherData, isFecting } = this.props;
 
     const cityIdList = [
       {
@@ -72,21 +58,39 @@ export default class App extends Component {
       <div>
         <h1>{this.state.appTitle}</h1>
 
-        <select onChange={this.changeCity}>
+        <select onChange={this.handleChangeCity}>
           {options}
         </select>
 
-        <button onClick={this.getWeatherData}>get weather</button>
+        <button onClick={this.handleGetWeather}>get weather</button>
 
         <div style={style}>
-          {this.state.loadStatus}
+          {isFecting +''}
         </div>
 
         <div>
-          { JSON.stringify(data, null, 2) }
+          { JSON.stringify(weatherData, null, 2) }
         </div>
 
       </div>
     );
   }
 }
+
+const mapDispatchToProps = (dispatch) => ({
+    getWeatherData: (cityId) => {
+      dispatch(getWeatherData(cityId))
+    }
+});
+
+const mapStatsToProps = (state) => {
+  return {
+    weatherData: state.weather.data,
+    isFecting: state.weather.isFecting
+  }
+};
+
+export default connect(
+    mapStatsToProps,
+    mapDispatchToProps,
+)(App);
