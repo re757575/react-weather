@@ -26,6 +26,7 @@ export const getWeatherData = function(cityId) {
             type: FETCH_WEATHER,
             playload: json
           });
-        });
+        })
+        .catch(ex => console.log('parsing failed', ex));
   }
 };

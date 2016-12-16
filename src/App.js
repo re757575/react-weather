@@ -45,7 +45,16 @@ class App extends Component {
         1668341: '台北'
       },
       {
+        6696918: '桃園'
+      },
+      {
         1668399: '台中'
+      },
+      {
+        1668355 : '台南'
+      },
+      {
+        1673820: '高雄'
       }
     ];
 
@@ -53,25 +62,38 @@ class App extends Component {
       <option key={k} value={Object.keys(v)}>{Object.values(v)}</option>
     );
 
+    const cityWeatherState = () => {
+
+      if (isFecting && !weatherData.name) {
+        return (
+          <div>{'取得資料中...'}</div>
+        );
+      } else if (!isFecting && !weatherData.name) {
+        return (
+          <div>{'無資料'}</div>
+        );
+      }
+
+      return (<div>
+        <ul>
+          <li>城市: {weatherData.name}</li>
+          <li>天氣: {weatherData.weather[0].description}</li>
+          <li>溫度: {Math.floor(weatherData.main.temp - 273.15)} ℃</li>
+          <li>濕度: {weatherData.main.humidity} %</li>
+        </ul>
+      </div>);
+    }
+
     return (
 
       <div>
         <h1>{this.state.appTitle}</h1>
 
-        <select onChange={this.handleChangeCity}>
-          {options}
-        </select>
+        <select onChange={this.handleChangeCity}>{options}</select>
 
-        <button onClick={this.handleGetWeather}>get weather</button>
+        <span><button onClick={this.handleGetWeather}>get weather</button></span>
 
-        <div style={style}>
-          {isFecting +''}
-        </div>
-
-        <div>
-          { JSON.stringify(weatherData, null, 2) }
-        </div>
-
+        {cityWeatherState()}
       </div>
     );
   }
