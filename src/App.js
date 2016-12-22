@@ -91,7 +91,7 @@ class App extends Component {
 
         <select onChange={this.handleChangeCity}>{options}</select>
 
-        <span><button onClick={this.handleGetWeather}>get weather</button></span>
+        <span><button disabled={!this.state.selectedCity} onClick={this.handleGetWeather}>get weather</button></span>
 
         {cityWeatherState()}
       </div>
