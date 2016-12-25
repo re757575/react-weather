@@ -60,7 +60,7 @@ class App extends Component {
     ];
 
     const options = cityIdList.map((v, k) =>
-      <option key={k} value={Object.keys(v)}>{Object.values(v)}</option>
+      <option key={k} value={Object.keys(v)}>{v[Object.keys(v)]}</option>
     );
 
     const cityWeatherState = () => {
