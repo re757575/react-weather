@@ -5,10 +5,9 @@
 <!--[if gt IE 8]><!-->
 <html class="no-js">
 <!--<![endif]-->
-
-<head>
+  <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width" />
+    <meta content="ie=edge" http-equiv="x-ua-compatible">
     <title><%= htmlWebpackPlugin.options.title || 'Webpack App' %></title>
 
     <% if (htmlWebpackPlugin.files.favicon) { %>
@@ -16,14 +15,15 @@
     <% } %>
     <% if (htmlWebpackPlugin.options.mobile) { %>
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <% } else { %>
+    <meta name="viewport" content="width=device-width" />
     <% } %>
     <% for (var css in htmlWebpackPlugin.files.css) { %>
     <link href="<%= htmlWebpackPlugin.files.css[css] %>" rel="stylesheet">
     <% } %>
-</head>
+  </head>
 
-<body>
+  <body>
     <div id='root'></div>
-</body>
-
+  </body>
 </html>
