@@ -23,3 +23,9 @@ ReactDOM.render(
   </Provider>,
   document.getElementById('root')
 );
+
+import { install, applyUpdate } from 'offline-plugin/runtime';
+
+install({
+  onUpdateReady: () => applyUpdate()
+});

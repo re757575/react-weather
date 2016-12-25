@@ -3,9 +3,10 @@ var util = require('util');
 var webpack = require('webpack');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 var CleanWebpackPlugin = require('clean-webpack-plugin');
+var CopyWebpackPlugin = require('copy-webpack-plugin');
+var OfflinePlugin = require('offline-plugin');
 
 const pkg = require('./package.json');
-var htmlTemplatePath = path.resolve(__dirname, 'src', 'assets', 'templates', 'index-template.html');
 
 module.exports = {
   // devtool: 'source-map',
@@ -18,10 +19,17 @@ module.exports = {
   },
   plugins: [
     new CleanWebpackPlugin(['dist'], { verbose: false }),
+    new CopyWebpackPlugin([{ from: 'public/' }]),
+    new webpack.optimize.CommonsChunkPlugin({
+      names: ['manifest'],
+      minChunks: Infinity,
+      filename: '[name].[chunkhash:8].js'
+    }),
     new HtmlWebpackPlugin({
       title: util.format('React Weather %s', pkg.version),
       filename: 'index.html',
-      template: htmlTemplatePath
+      mobile: true,
+      template: 'public/index.html'
     }),
     new webpack.optimize.UglifyJsPlugin({
       compress: {
@@ -30,7 +38,11 @@ module.exports = {
     }),
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': '"production"'
-    }) 
+    }),
+    new OfflinePlugin({
+      excludes: ['images/*'],
+      ServiceWorker: { events: true }
+    })
   ],
   module: {
     loaders: [{
