@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { getWeatherData } from './actions';
+import { getWeatherData } from '../actions';
+
 class App extends Component {
 
   constructor(props) {
