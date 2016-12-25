@@ -20,7 +20,14 @@ module.exports = {
   },
   plugins: [
     new CleanWebpackPlugin(['dist'], { verbose: false }),
-    new CopyWebpackPlugin([{ from: 'public/' }]),
+    new CopyWebpackPlugin(
+      [
+        { from: 'public/' }
+      ],
+      {
+        ignore: ['.DS_Store']
+      }
+    ),
     new webpack.optimize.CommonsChunkPlugin({
       names: ['manifest'],
       minChunks: Infinity,
