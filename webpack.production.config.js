@@ -11,6 +11,7 @@ const pkg = require('./package.json');
 module.exports = {
   // devtool: 'source-map',
   entry: [
+    'whatwg-fetch',
     './src/index'
   ],
   output: {
