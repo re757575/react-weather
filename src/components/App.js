@@ -1,67 +1,35 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { getWeatherData } from '../actions';
+import SelectCityList from './SelectCityList';
 
 class App extends Component {
 
   constructor(props) {
 
-    console.log('constructor()');
+    console.log('constructor App');
 
     super(props);
 
     this.state = {
-      appTitle: 'React Weather',
-      selectedCity: null
+      appTitle: 'React Weather'
     };
 
-    this.handleChangeCity = this.handleChangeCity.bind(this);
     this.handleGetWeather = this.handleGetWeather.bind(this);
   }
 
-  handleChangeCity(e) {
-    console.log('handleChangeCity()');
-    const selectedCity = e.target.value;
-    this.setState({selectedCity});
-  }
-
   handleGetWeather() {
+    this.props.getWeatherData(this.props.selectedCity);
     console.log('handleGetWeather()');
-    this.props.getWeatherData(this.state.selectedCity);
   }
 
   render() {
 
-    console.log('render()');
+    console.log('render App');
 
     const style = {color: 'red'};
 
-    const { weatherData, isFecting } = this.props;
-
-    const cityIdList = [
-      {
-        '': '請選擇'
-      },
-      {
-        1668341: '台北'
-      },
-      {
-        6696918: '桃園'
-      },
-      {
-        1668399: '台中'
-      },
-      {
-        1668355 : '台南'
-      },
-      {
-        1673820: '高雄'
-      }
-    ];
-
-    const options = cityIdList.map((v, k) =>
-      <option key={k} value={Object.keys(v)}>{v[Object.keys(v)]}</option>
-    );
+    const { weatherData, isFecting, selectedCity } = this.props;
 
     const cityWeatherState = () => {
 
@@ -89,10 +57,9 @@ class App extends Component {
 
       <div>
         <h1>{this.state.appTitle}</h1>
+        <SelectCityList/>
 
-        <select onChange={this.handleChangeCity}>{options}</select>
-
-        <span><button disabled={!this.state.selectedCity} onClick={this.handleGetWeather}>get weather</button></span>
+        <span><button disabled={!selectedCity} onClick={this.handleGetWeather}>get weather</button></span>
 
         {cityWeatherState()}
       </div>
@@ -109,7 +76,8 @@ const mapDispatchToProps = (dispatch) => ({
 const mapStatsToProps = (state) => {
   return {
     weatherData: state.weather.data,
-    isFecting: state.weather.isFecting
+    isFecting: state.weather.isFecting,
+    selectedCity: state.weather.selectedCity     
   }
 };
 

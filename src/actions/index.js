@@ -1,5 +1,6 @@
 export const REQUEST_WEATHER = 'REQUEST_WEATHER';
 export const FETCH_WEATHER = 'FETCH_WEATHER';
+export const SELECT_CITY = 'SELECT_CITY';
 
 export const requstWeather = function() {
   return {
@@ -29,4 +30,11 @@ export const getWeatherData = function(cityId) {
         })
         .catch(ex => console.log('parsing failed', ex));
   }
+};
+
+export const selectCity = function(cityId) {
+  return {
+    type: SELECT_CITY,
+    cityId: cityId
+  };
 };

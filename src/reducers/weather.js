@@ -1,7 +1,9 @@
-import { REQUEST_WEATHER, FETCH_WEATHER } from '../actions';
+import { REQUEST_WEATHER, FETCH_WEATHER, SELECT_CITY } from '../actions';
 
 const defaultState = {
-  isFecting: false, data: {}
+  isFecting: false,
+  selectedCity: null,
+  data: {}
 };
 
 const weather = (state = defaultState, action) => {
@@ -9,6 +11,7 @@ const weather = (state = defaultState, action) => {
   switch (action.type) {
     case REQUEST_WEATHER:
       return {
+        ...state,
         isFecting: true,
         data: {}
       };
@@ -18,6 +21,12 @@ const weather = (state = defaultState, action) => {
         ...state,
         isFecting: false,
         data: action.playload
+      };
+
+    case SELECT_CITY:
+      return {
+        ...state,
+        selectedCity: action.cityId
       };
 
     default:
