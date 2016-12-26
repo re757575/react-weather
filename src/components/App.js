@@ -4,6 +4,7 @@ import AppWeather from '../containers/AppWeatherContainer';
 
 const App = () => (
   <div>
+    <h1>React Weather</h1>
     <SelectCityList/>
     <AppWeather/>
   </div>
