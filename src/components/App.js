@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { getWeatherData } from '../actions';
-import SelectCityList from './SelectCityList';
+import SelectCityList from '../containers/SelectCityListContainer';
 
 class App extends Component {
 

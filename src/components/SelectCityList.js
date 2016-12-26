@@ -1,48 +1,19 @@
-import React, {Component} from 'react';
+import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
-import { selectCity } from '../actions';
 import cityIdList from '../constants/cityIdList';
 
-class SelectCityList extends Component {
+const options = cityIdList.map((v, k) =>
+  <option key={k} value={Object.keys(v)}>{v[Object.keys(v)]}</option>
+);
 
-  constructor(props) {
+const SelectCityList = ({onSelectCity}) => (
+  <div>
+    <select onChange={onSelectCity}>{options}</select>
+  </div>
+);
 
-    console.log('constructor SelectCityList');
-
-    super(props);
-
-    this.handleChangeCity = this.handleChangeCity.bind(this);
-  }
-
-  handleChangeCity(e) {
-    const selectedCity = e.target.value;
-    this.props.selectCity(selectedCity);
-    console.log('handleChangeCity()', selectedCity);
-  }
-
-  render() {
-
-    console.log('render SelectCityList');
-
-    const options = cityIdList.map((v, k) =>
-      <option key={k} value={Object.keys(v)}>{v[Object.keys(v)]}</option>
-    );
-
-    return (
-      <div>
-        <select onChange={this.handleChangeCity}>{options}</select>
-      </div>
-    );
-  }
+SelectCityList.propTypes = {
+  onSelectCity: PropTypes.func.isRequired
 }
 
-const mapDispatchToProps = (dispatch) => ({
-    selectCity: (cityId) => {
-      dispatch(selectCity(cityId))
-    }
-});
-
-export default connect(
-    null,
-    mapDispatchToProps,
-)(SelectCityList);
+export default SelectCityList;
