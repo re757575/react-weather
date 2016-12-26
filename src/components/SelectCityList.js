@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux';
 import { selectCity } from '../actions';
+import cityIdList from '../constants/cityIdList';
 
 class SelectCityList extends Component {
 
@@ -22,27 +23,6 @@ class SelectCityList extends Component {
   render() {
 
     console.log('render SelectCityList');
-
-    const cityIdList = [
-      {
-        '': '請選擇'
-      },
-      {
-        1668341: '台北'
-      },
-      {
-        6696918: '桃園'
-      },
-      {
-        1668399: '台中'
-      },
-      {
-        1668355 : '台南'
-      },
-      {
-        1673820: '高雄'
-      }
-    ];
 
     const options = cityIdList.map((v, k) =>
       <option key={k} value={Object.keys(v)}>{v[Object.keys(v)]}</option>

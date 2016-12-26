@@ -1,0 +1,3 @@
+export const REQUEST_WEATHER = 'REQUEST_WEATHER';
+export const FETCH_WEATHER = 'FETCH_WEATHER';
+export const SELECT_CITY = 'SELECT_CITY';

@@ -1,4 +1,8 @@
-import { REQUEST_WEATHER, FETCH_WEATHER, SELECT_CITY } from '../actions';
+import {
+  REQUEST_WEATHER,
+  FETCH_WEATHER,
+  SELECT_CITY
+} from '../constants/actionTypes';
 
 const defaultState = {
   isFecting: false,
