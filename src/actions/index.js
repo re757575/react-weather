@@ -1,6 +1,8 @@
 import {
   REQUEST_WEATHER,
+  REQUEST_FORECAST,
   FETCH_WEATHER,
+  FETCH_FORECAST,
   SELECT_CITY
 } from '../constants/actionTypes';
 
@@ -10,7 +12,13 @@ export const requstWeather = function() {
   }
 };
 
-export const getWeatherData = function(cityId) {
+export const requstForecast = function() {
+  return {
+    type: REQUEST_FORECAST
+  }
+};
+
+export const getCurrentWeatherData = function(cityId) {
 
   const APPID = '3a494cb65411295b23e82358cf4f07f6';
   let url = `http://api.openweathermap.org/data/2.5/weather?id=${cityId}&APPID=${APPID}&units=metric&&lang=zh_tw`;
@@ -33,6 +41,27 @@ export const getWeatherData = function(cityId) {
         .catch(ex => console.log('parsing failed', ex));
   }
 };
+
+export const getForecastData = function(cityId) {
+
+  const APPID = '3a494cb65411295b23e82358cf4f07f6';
+  let url = `http://api.openweathermap.org/data/2.5/forecast?id=${cityId}&appid=${APPID}&cnt=5&units=metric&lang=zh_tw`;
+
+  return dispatch => {
+
+    dispatch(requstForecast());
+
+    return fetch(url)
+        .then(response => response.json())
+        .then(json => {
+          dispatch({
+            type: FETCH_FORECAST,
+            playload: json
+          });
+        })
+        .catch(ex => console.log('parsing failed', ex));
+  }
+}
 
 export const selectCity = function(cityId) {
   return {

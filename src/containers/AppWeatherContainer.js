@@ -1,12 +1,16 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { getWeatherData } from '../actions';
+import { getCurrentWeatherData, getForecastData } from '../actions';
 import AppWeather from '../components/AppWeather';
 
 const mapDispatchToProps = (dispatch,aa) => ({
-    onGetWeatherData: (cityId) => {
+    onGetCurrentWeatherData: (cityId) => {
       if (!cityId) return false;
-      dispatch(getWeatherData(cityId));
+      dispatch(getCurrentWeatherData(cityId));
+    },
+    onGetForecastData: (cityId) => {
+      if (!cityId) return false;
+      dispatch(getForecastData(cityId));
     }
 });
 
