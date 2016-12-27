@@ -45,7 +45,8 @@ export const getCurrentWeatherData = function(cityId) {
 export const getForecastData = function(cityId) {
 
   const APPID = '3a494cb65411295b23e82358cf4f07f6';
-  let url = `http://api.openweathermap.org/data/2.5/forecast?id=${cityId}&appid=${APPID}&cnt=5&units=metric&lang=zh_tw`;
+  const count = 9;
+  let url = `http://api.openweathermap.org/data/2.5/forecast?id=${cityId}&appid=${APPID}&cnt=${count}&units=metric&lang=zh_tw`;
 
   return dispatch => {
 

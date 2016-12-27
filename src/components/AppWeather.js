@@ -2,17 +2,21 @@ import React, { PropTypes } from 'react';
 
 const currentCityWeatherState = (weatherData, isFecting) => {
 
+  let style = {
+    marginTop: '10px'
+  };
+
   if (isFecting && !weatherData.current) {
     return (
-      <div>{'取得目前天氣資料中...'}</div>
+      <div style={style}>{'取得目前天氣資料中...'}</div>
     );
   } else if (!isFecting && !weatherData.current) {
     return (
-      <div>{'無目前天氣資料'}</div>
+      <div style={style}>{'無目前天氣資料'}</div>
     );
   }
 
-  return (<div>
+  return (<div style={style}>
     <h3>目前天氣</h3>
     <ul>
       <li>城市: {weatherData.current.name}</li>
@@ -40,6 +44,7 @@ const forecastState = (weatherData, isFecting) => {
     return (<div key={k}>
       <ul>
         <li>天氣: {v.weather[0].description}</li>
+        <li>溫度: {Math.floor(v.main.temp)} ({v.main.temp_min}~{v.main.temp_max})℃</li>
         <li>濕度: {v.main.humidity} %</li>
         <li>陣風: {v.wind.speed} m/s</li>
         <li>{v.dt_txt}</li>
@@ -53,7 +58,6 @@ const forecastState = (weatherData, isFecting) => {
       {list}
     </div>
   );
-
 };
 
 const AppWeather = ({
@@ -71,7 +75,7 @@ const AppWeather = ({
 
     return (
       <div>
-        <span><button disabled={!selectedCity} onClick={handleGetWeatherData}>get weather</button></span>
+        <button disabled={!selectedCity} onClick={handleGetWeatherData}>查詢</button>
         {currentCityWeatherState(weatherData, isFecting)}
         <hr/>
         {forecastState(weatherData, isFecting)}
