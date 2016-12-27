@@ -13,7 +13,7 @@ export const requstWeather = function() {
 export const getWeatherData = function(cityId) {
 
   const APPID = '3a494cb65411295b23e82358cf4f07f6';
-  let url = `http://api.openweathermap.org/data/2.5/weather?id=${cityId}&APPID=${APPID}`;
+  let url = `http://api.openweathermap.org/data/2.5/weather?id=${cityId}&APPID=${APPID}&units=metric&&lang=zh_tw`;
 
   // https://github.com/reactjs/redux/issues/1676
   // Redux Thunk will inject dispatch here

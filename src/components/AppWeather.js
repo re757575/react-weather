@@ -16,8 +16,9 @@ const cityWeatherState = (weatherData, isFecting) => {
     <ul>
       <li>城市: {weatherData.name}</li>
       <li>天氣: {weatherData.weather[0].description}</li>
-      <li>溫度: {Math.floor(weatherData.main.temp - 273.15)} ℃</li>
+      <li>溫度: {Math.floor(weatherData.main.temp)} ({weatherData.main.temp_min}~{weatherData.main.temp_max})℃</li>
       <li>濕度: {weatherData.main.humidity} %</li>
+      <li>陣風: {weatherData.wind.speed} m/s</li>
     </ul>
   </div>);
 };
