@@ -55,10 +55,12 @@ export const getForecastData = function(cityId) {
     return fetch(url)
         .then(response => response.json())
         .then(json => {
-          dispatch({
-            type: FETCH_FORECAST,
-            playload: json
-          });
+          setTimeout(() => {
+            dispatch({
+              type: FETCH_FORECAST,
+              playload: json
+            });
+          }, 200);
         })
         .catch(ex => console.log('parsing failed', ex));
   }

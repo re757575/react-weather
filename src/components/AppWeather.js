@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react';
 import cityList, { getCityNameById } from '../constants/cityIdList.js';
 
-const currentCityWeatherState = (weatherData, isFecting, selectedCity, onGetCurrentWeatherData) => {
+const currentCityWeatherState = (weatherData, isFectingWeather, selectedCity, onGetCurrentWeatherData) => {
 
   let divStyle = {
     marginTop: '10px',
@@ -14,14 +14,14 @@ const currentCityWeatherState = (weatherData, isFecting, selectedCity, onGetCurr
     textDecoration: 'none'
   }
 
-  if (isFecting && !weatherData.current) {
+  if (isFectingWeather && !weatherData.current) {
     return (
       <div style={divStyle}>
         <h3>{getCityNameById(selectedCity)} 目前天氣</h3>
         <span>{'取得目前天氣資料中...'}</span>
       </div>
     );
-  } else if (!isFecting && !weatherData.current) {
+  } else if (!isFectingWeather && !weatherData.current) {
     return (
       <div style={divStyle}>
         <h3>{getCityNameById(selectedCity)} 目前天氣</h3>
@@ -43,7 +43,7 @@ const currentCityWeatherState = (weatherData, isFecting, selectedCity, onGetCurr
   </div>);
 };
 
-const forecastState = (weatherData,isFecting, selectedCity, onGetForecastData) => {
+const forecastState = (weatherData, isFectingForecast, selectedCity, onGetForecastData) => {
 
   let divStyle = {
     minHeight: '2200px',
@@ -55,14 +55,14 @@ const forecastState = (weatherData,isFecting, selectedCity, onGetForecastData) =
     textDecoration: 'none'
   }
 
-  if (isFecting && !weatherData.forecast) {
+  if (isFectingForecast && !weatherData.forecast) {
     return (
       <div style={divStyle}>
         <h3>{getCityNameById(selectedCity)} 天氣預報</h3>
         <div>{'取得天氣預報資料中...'}</div>
       </div>
     );
-  } else if (!isFecting && !weatherData.forecast) {
+  } else if (!isFectingForecast && !weatherData.forecast) {
     return (
       <div style={divStyle}>
         <h3>{getCityNameById(selectedCity)} 天氣預報</h3>
@@ -95,7 +95,8 @@ const forecastState = (weatherData,isFecting, selectedCity, onGetForecastData) =
 const AppWeather = ({
     weatherData,
     selectedCity,
-    isFecting,
+    isFectingWeather,
+    isFectingForecast,
     onGetCurrentWeatherData,
     onGetForecastData
   }) => {
@@ -108,9 +109,9 @@ const AppWeather = ({
     return (
       <div>
         <button disabled={!selectedCity} onClick={handleGetWeatherData}>查詢</button>
-        {currentCityWeatherState(weatherData, isFecting, selectedCity, onGetCurrentWeatherData)}
+        {currentCityWeatherState(weatherData, isFectingWeather, selectedCity, onGetCurrentWeatherData)}
         <hr/>
-        {forecastState(weatherData, isFecting, selectedCity, onGetForecastData)}
+        {forecastState(weatherData, isFectingForecast, selectedCity, onGetForecastData)}
       </div>
     )
 };
@@ -118,7 +119,8 @@ const AppWeather = ({
 AppWeather.propTypes = {
   weatherData: PropTypes.object,
   selectedCity: PropTypes.string,
-  isFecting: PropTypes.bool.isRequired,
+  isFectingWeather: PropTypes.bool.isRequired,
+  isFectingForecast: PropTypes.bool.isRequired,
   onGetCurrentWeatherData: PropTypes.func.isRequired,
   onGetForecastData: PropTypes.func.isRequired
 }

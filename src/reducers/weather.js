@@ -7,7 +7,8 @@ import {
 } from '../constants/actionTypes';
 
 const defaultState = {
-  isFecting: false,
+  isFectingWeather: false,
+  isFectingForecast: false,
   selectedCity: null,
   data: {
     current: null,
@@ -21,28 +22,28 @@ const weather = (state = defaultState, action) => {
     case REQUEST_WEATHER:
       return {
         ...state,
-        isFecting: true,
+        isFectingWeather: true,
         data: {current: null, forecast: state.data.forecast}
       };
 
     case REQUEST_FORECAST:
       return {
         ...state,
-        isFecting: true,
+        isFectingForecast: true,
         data: {current: state.data.current, forecast: null}
       };
 
     case FETCH_WEATHER:
       return {
         ...state,
-        isFecting: false,
+        isFectingWeather: false,
         data: { current: action.playload, forecast: state.data.forecast }
       };
 
     case FETCH_FORECAST:
       return {
         ...state,
-        isFecting: false,
+        isFectingForecast: false,
         data: { current: state.data.current, forecast: action.playload }
       };
 

@@ -17,7 +17,8 @@ const mapDispatchToProps = (dispatch) => ({
 const mapStatsToProps = (state) => {
   return {
     weatherData: state.weather.data,
-    isFecting: state.weather.isFecting,
+    isFectingWeather: state.weather.isFectingWeather,
+    isFectingForecast: state.weather.isFectingForecast,
     selectedCity: state.weather.selectedCity     
   }
 };
