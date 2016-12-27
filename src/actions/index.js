@@ -64,7 +64,7 @@ export const getForecastData = function(cityId) {
   }
 }
 
-export const selectCity = function(cityId) {
+export const selectCity = function(cityId) {  
   return {
     type: SELECT_CITY,
     cityId: cityId

@@ -1,11 +1,17 @@
 import { connect } from 'react-redux';
-import { selectCity } from '../actions';
+import { selectCity, getCurrentWeatherData, getForecastData } from '../actions';
 import cityIdList from '../constants/cityIdList'
 import SelectCityList from '../components/SelectCityList';
 
 const mapDispatchToProps = (dispatch) => ({
     onSelectCity: (e) => {
-      dispatch(selectCity(e.target.value));
+      const cityId = e.target.value;
+      dispatch(selectCity(cityId));
+      
+      if (cityId) {
+        dispatch(getCurrentWeatherData(cityId));
+        dispatch(getForecastData(cityId));
+      }
     }
 });
 

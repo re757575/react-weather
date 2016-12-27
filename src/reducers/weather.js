@@ -49,7 +49,8 @@ const weather = (state = defaultState, action) => {
     case SELECT_CITY:
       return {
         ...state,
-        selectedCity: action.cityId
+        selectedCity: action.cityId,
+        data: { current: null, forecast: null }
       };
 
     default:

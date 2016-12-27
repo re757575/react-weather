@@ -20,3 +20,18 @@ const cityIdList = [
 ];
 
 export default cityIdList;
+
+export const getCityNameById = cityId => {
+
+  if (!cityId) {
+    return '';
+  }
+
+  var obj = cityIdList.filter(function ( obj ) {
+      if (Object.keys(obj).toString() === cityId.toString()) {
+        return true;
+      }
+  })[0];
+
+  return obj[cityId] ? obj[cityId] : '';
+};

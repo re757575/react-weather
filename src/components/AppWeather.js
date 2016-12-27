@@ -1,23 +1,38 @@
 import React, { PropTypes } from 'react';
+import cityList, { getCityNameById } from '../constants/cityIdList.js';
 
-const currentCityWeatherState = (weatherData, isFecting) => {
+const currentCityWeatherState = (weatherData, isFecting, selectedCity, onGetCurrentWeatherData) => {
 
-  let style = {
-    marginTop: '10px'
+  let divStyle = {
+    marginTop: '10px',
+    minHeight: '200px',
+    pointerEvents: !selectedCity ? 'none' : ''
   };
+
+  let reloadLinkStyle = {
+    color: !selectedCity ? 'gray' : '',
+    textDecoration: 'none'
+  }
 
   if (isFecting && !weatherData.current) {
     return (
-      <div style={style}>{'取得目前天氣資料中...'}</div>
+      <div style={divStyle}>
+        <h3>{getCityNameById(selectedCity)} 目前天氣</h3>
+        <span>{'取得目前天氣資料中...'}</span>
+      </div>
     );
   } else if (!isFecting && !weatherData.current) {
     return (
-      <div style={style}>{'無目前天氣資料'}</div>
+      <div style={divStyle}>
+        <h3>{getCityNameById(selectedCity)} 目前天氣</h3>
+        <span>{'無資料'}</span>
+      </div>
     );
   }
 
-  return (<div style={style}>
-    <h3>目前天氣</h3>
+  return (<div style={divStyle}>
+    <h3>{getCityNameById(selectedCity)} 目前天氣</h3> 
+    <a href="javascript:void(0)" style={reloadLinkStyle} onClick={() => onGetCurrentWeatherData(selectedCity)}>重新讀取</a>
     <ul>
       <li>城市: {weatherData.current.name}</li>
       <li>天氣: {weatherData.current.weather[0].description}</li>
@@ -28,15 +43,31 @@ const currentCityWeatherState = (weatherData, isFecting) => {
   </div>);
 };
 
-const forecastState = (weatherData, isFecting) => {
+const forecastState = (weatherData,isFecting, selectedCity, onGetForecastData) => {
+
+  let divStyle = {
+    minHeight: '2200px',
+    pointerEvents: !selectedCity ? 'none' : ''
+  };
+
+  let reloadLinkStyle = {
+    color: !selectedCity ? 'gray' : '',
+    textDecoration: 'none'
+  }
 
   if (isFecting && !weatherData.forecast) {
     return (
-      <div>{'取得天氣預報資料中...'}</div>
+      <div style={divStyle}>
+        <h3>{getCityNameById(selectedCity)} 天氣預報</h3>
+        <div>{'取得天氣預報資料中...'}</div>
+      </div>
     );
   } else if (!isFecting && !weatherData.forecast) {
     return (
-      <div>{'無天氣預報資料'}</div>
+      <div style={divStyle}>
+        <h3>{getCityNameById(selectedCity)} 天氣預報</h3>
+        <span>{'無資料'}</span>
+      </div>
     );
   }
 
@@ -53,8 +84,9 @@ const forecastState = (weatherData, isFecting) => {
   });
 
   return (
-    <div>
-      <h3>天氣預報</h3>
+    <div style={divStyle}>
+      <h3>{getCityNameById(selectedCity)} 天氣預報</h3>
+      <a href="javascript:void(0)" style={reloadLinkStyle} onClick={() => onGetForecastData(selectedCity)}>重新讀取</a>
       {list}
     </div>
   );
@@ -76,9 +108,9 @@ const AppWeather = ({
     return (
       <div>
         <button disabled={!selectedCity} onClick={handleGetWeatherData}>查詢</button>
-        {currentCityWeatherState(weatherData, isFecting)}
+        {currentCityWeatherState(weatherData, isFecting, selectedCity, onGetCurrentWeatherData)}
         <hr/>
-        {forecastState(weatherData, isFecting)}
+        {forecastState(weatherData, isFecting, selectedCity, onGetForecastData)}
       </div>
     )
 };

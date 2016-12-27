@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { getCurrentWeatherData, getForecastData } from '../actions';
 import AppWeather from '../components/AppWeather';
 
-const mapDispatchToProps = (dispatch,aa) => ({
+const mapDispatchToProps = (dispatch) => ({
     onGetCurrentWeatherData: (cityId) => {
       if (!cityId) return false;
       dispatch(getCurrentWeatherData(cityId));
