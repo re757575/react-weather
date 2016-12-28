@@ -21,8 +21,8 @@ const FeachBtn = ({
 
 FeachBtn.propTypes = {
   selectedCity: PropTypes.string,
-  onGetCurrentWeatherData: PropTypes.func.isRequire ,
-  onGetForecastData: PropTypes.func.isRequire
+  onGetCurrentWeatherData: PropTypes.func.isRequired ,
+  onGetForecastData: PropTypes.func.isRequired
 };
 
 const mapDispatchToProps = (dispatch) => ({
