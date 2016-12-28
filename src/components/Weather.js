@@ -1,18 +1,14 @@
 import React, { PropTypes } from 'react';
 import cityList, { getCityNameById } from '../constants/cityIdList.js';
+import ReloadDataLink from './ReloadDataLink';
 
-const currentCityWeatherState = (weatherData, isFectingWeather, selectedCity, onGetCurrentWeatherData) => {
+const currentCityWeatherState = (weatherData, isFectingWeather, selectedCity) => {
 
   let divStyle = {
     marginTop: '10px',
     minHeight: '200px',
     pointerEvents: !selectedCity ? 'none' : ''
   };
-
-  let reloadLinkStyle = {
-    color: !selectedCity ? 'gray' : '',
-    textDecoration: 'none'
-  }
 
   if (isFectingWeather && !weatherData.current) {
     return (
@@ -32,7 +28,7 @@ const currentCityWeatherState = (weatherData, isFectingWeather, selectedCity, on
 
   return (<div style={divStyle}>
     <h3>{getCityNameById(selectedCity)} 目前天氣</h3> 
-    <a href="javascript:void(0)" style={reloadLinkStyle} onClick={() => onGetCurrentWeatherData(selectedCity)}>重新讀取</a>
+    <ReloadDataLink reloadType="weather"/>
     <ul>
       <li>城市: {weatherData.current.name}</li>
       <li>天氣: {weatherData.current.weather[0].description}</li>
@@ -46,13 +42,12 @@ const currentCityWeatherState = (weatherData, isFectingWeather, selectedCity, on
 const Weather = ({
     weatherData,
     selectedCity,
-    isFectingWeather,
-    onGetCurrentWeatherData
+    isFectingWeather
   }) => {
 
     return (
       <div>
-        {currentCityWeatherState(weatherData, isFectingWeather, selectedCity, onGetCurrentWeatherData)}
+        {currentCityWeatherState(weatherData, isFectingWeather, selectedCity)}
         <hr/>
       </div>
     )
@@ -61,8 +56,7 @@ const Weather = ({
 Weather.propTypes = {
   weatherData: PropTypes.object,
   selectedCity: PropTypes.string,
-  isFectingWeather: PropTypes.bool.isRequired,
-  onGetCurrentWeatherData: PropTypes.func.isRequired
+  isFectingWeather: PropTypes.bool.isRequired
 }
 
 export default Weather;
