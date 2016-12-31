@@ -1,5 +1,5 @@
-import devConfig from './config.dev';
-import prodConfig from './config.prod';
+import devConfig from './configureStore.development';
+import prodConfig from './configureStore.production';
 
 let loadedStore = null;
 
