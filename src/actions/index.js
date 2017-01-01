@@ -1,3 +1,5 @@
+import fetch from 'isomorphic-fetch';
+
 import {
   REQUEST_WEATHER,
   REQUEST_FORECAST,
@@ -46,7 +48,7 @@ export const getForecastData = function(cityId) {
 
   const APPID = '3a494cb65411295b23e82358cf4f07f6';
   const count = 9;
-  let url = `http://api.openweathermap.org/data/2.5/forecast?id=${cityId}&appid=${APPID}&cnt=${count}&units=metric&lang=zh_tw`;
+  let url = `http://api.openweathermap.org/data/2.5/forecast?id=${cityId}&APPID=${APPID}&cnt=${count}&units=metric&lang=zh_tw`;
 
   return dispatch => {
 
