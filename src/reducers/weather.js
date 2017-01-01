@@ -23,14 +23,14 @@ const weather = (state = defaultState, action) => {
       return {
         ...state,
         isFectingWeather: true,
-        data: {current: null, forecast: state.data.forecast}
+        data: { current: null, forecast: state.data.forecast }
       };
 
     case REQUEST_FORECAST:
       return {
         ...state,
         isFectingForecast: true,
-        data: {current: state.data.current, forecast: null}
+        data: { current: state.data.current, forecast: null }
       };
 
     case FETCH_WEATHER:
