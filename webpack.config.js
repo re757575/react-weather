@@ -9,6 +9,11 @@ module.exports = {
     'webpack/hot/only-dev-server',
     './src/index'
   ],
+  resolve: {
+    alias: {
+      'react/lib/ReactMount': 'react-dom/lib/ReactMount'
+    }
+  },
   output: {
     path: path.join(__dirname, 'dist'),
     filename: 'bundle.js'
