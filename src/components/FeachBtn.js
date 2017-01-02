@@ -2,7 +2,7 @@ import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { getCurrentWeatherData, getForecastData } from '../actions';
 
-const FeachBtn = ({
+export const FeachBtn = ({
   selectedCity,
   onGetCurrentWeatherData,
   onGetForecastData }) => {

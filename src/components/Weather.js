@@ -39,7 +39,7 @@ const currentCityWeatherState = (weatherData, isFectingWeather, selectedCity) =>
   </div>);
 };
 
-const Weather = ({
+export const Weather = ({
     weatherData,
     selectedCity,
     isFectingWeather

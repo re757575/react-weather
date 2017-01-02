@@ -2,6 +2,7 @@ import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { getCurrentWeatherData, getForecastData } from '../actions';
 
+// TODO: ReloadDataLink 必須改寫 使用 props 傳遞參數, 不透過 store
 const ReloadDataLink = ({
   reloadType,
   selectedCity,
