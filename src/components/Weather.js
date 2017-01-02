@@ -2,7 +2,7 @@ import React, { PropTypes } from 'react';
 import cityList, { getCityNameById } from '../constants/cityIdList.js';
 import ReloadDataLink from './ReloadDataLink';
 
-const currentCityWeatherState = (weatherData, isFectingWeather, selectedCity) => {
+const currentCityWeatherState = (weatherData, isFectingWeather, selectedCity, onGetCurrentWeatherData) => {
 
   let divStyle = {
     marginTop: '10px',
@@ -28,26 +28,34 @@ const currentCityWeatherState = (weatherData, isFectingWeather, selectedCity) =>
 
   return (<div style={divStyle}>
     <h3>{getCityNameById(selectedCity)} 目前天氣</h3> 
-    <ReloadDataLink reloadType="weather"/>
+    <ReloadDataLink
+      reloadType="weather"
+      selectedCity={selectedCity}
+      onReload={onGetCurrentWeatherData} />
     <ul>
       <li>城市: {weatherData.current.name}</li>
       <li>天氣: {weatherData.current.weather[0].description}</li>
-      <li>溫度: {Math.floor(weatherData.current.main.temp)} ({weatherData.current.main.temp_min}~{weatherData.current.main.temp_max})℃</li>
+      <li>
+        溫度: {Math.floor(weatherData.current.main.temp)} 
+        ({weatherData.current.main.temp_min}~{weatherData.current.main.temp_max})℃
+      </li>
       <li>濕度: {weatherData.current.main.humidity} %</li>
       <li>陣風: {weatherData.current.wind.speed} m/s</li>
     </ul>
   </div>);
 };
 
-export const Weather = ({
+const Weather = ({
     weatherData,
     selectedCity,
-    isFectingWeather
+    isFectingWeather,
+    onGetCurrentWeatherData
   }) => {
 
     return (
       <div>
-        {currentCityWeatherState(weatherData, isFectingWeather, selectedCity)}
+        {currentCityWeatherState(weatherData,
+          isFectingWeather, selectedCity, onGetCurrentWeatherData)}
         <hr/>
       </div>
     )
@@ -56,7 +64,8 @@ export const Weather = ({
 Weather.propTypes = {
   weatherData: PropTypes.object,
   selectedCity: PropTypes.string,
-  isFectingWeather: PropTypes.bool.isRequired
+  isFectingWeather: PropTypes.bool.isRequired,
+  onGetCurrentWeatherData: PropTypes.func.isRequired
 }
 
 export default Weather;
