@@ -5,10 +5,10 @@ html {
 body {
   font-size: 13px;
   line-height: 20px;
+  margin: 0;
+  height: 100%;
 }
 
-#root {
-  top: 0;
-  left: 0;
-  width: 100%
+#container {
+  margin: 15px;
 }

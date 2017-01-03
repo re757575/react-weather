@@ -6,7 +6,7 @@ import ReloadDataLink from './ReloadDataLink';
 const forecastState = (weatherData, isFectingForecast, selectedCity, onGetForecastData) => {
 
   let divStyle = {
-    minHeight: '1194px',
+    minHeight: '200px',
     pointerEvents: !selectedCity ? 'none' : ''
   };
 

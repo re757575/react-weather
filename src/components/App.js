@@ -13,12 +13,14 @@ const App = () => (
       title="React Weather"
       iconClassNameRight="muidocs-icon-navigation-expand-more"
     />
-    <SelectCityList/>
-    <FeachBtn/>
-    <Weather/>
-    <Divider/>
-    <Forecast/>
-    <Divider/>
+    <div id="container">
+      <SelectCityList/>
+      <FeachBtn/>
+      <Weather/>
+      <Divider/>
+      <Forecast/>
+      <Divider/>
+    </div>
   </div>
 );
 
