@@ -1,16 +1,24 @@
 import React from 'react';
+import AppBar from 'material-ui/AppBar';
 import SelectCityList from '../containers/SelectCityListContainer';
 import Weather from '../containers/WeatherContainer';
 import Forecast from '../containers/ForecastContainer';
 import FeachBtn from './FeachBtn';
-
+import IconButton from 'material-ui/IconButton';
+import NavigationClose from 'material-ui/svg-icons/navigation/close';
+import Divider from 'material-ui/Divider';
 const App = () => (
   <div>
-    <h1>React Weather</h1>
+    <AppBar
+      title="React Weather"
+      iconClassNameRight="muidocs-icon-navigation-expand-more"
+    />
     <SelectCityList/>
     <FeachBtn/>
     <Weather/>
+    <Divider/>
     <Forecast/>
+    <Divider/>
   </div>
 );
 

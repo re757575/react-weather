@@ -1,23 +1,35 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
-import cityIdList from '../constants/cityIdList';
+import SelectField from 'material-ui/SelectField';
+import MenuItem from 'material-ui/MenuItem';
+import cityIdList, { getCityNameById } from '../constants/cityIdList';
 
 const style = {
   float: 'left',
-  marginRight: '10px'
+  marginRight: '30px',
+  marginTop: '20px'
 }
 
 const options = cityIdList.map((v, k) =>
-  <option key={k} value={Object.keys(v)}>{v[Object.keys(v)]}</option>
+  <MenuItem key={k} value={Object.keys(v).toString()} primaryText={v[Object.keys(v)]} />
 );
 
-const SelectCityList = ({onSelectCity}) => (
+const SelectCityList = ({selectedCity, onSelectCity}) => (
   <div>
-    <select style={style} onChange={onSelectCity}>{options}</select>
+    <SelectField
+      floatingLabelText="City"
+      value={selectedCity}
+      onChange={onSelectCity}
+      style={style}
+    >
+      {options}
+    </SelectField>
+
   </div>
 );
 
 SelectCityList.propTypes = {
+  selectedCity: PropTypes.string,
   onSelectCity: PropTypes.func.isRequired
 }
 

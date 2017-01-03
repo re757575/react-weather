@@ -1,4 +1,5 @@
 import React, { PropTypes } from 'react';
+import CircularProgress from 'material-ui/CircularProgress';
 import cityList, { getCityNameById } from '../constants/cityIdList.js';
 import ReloadDataLink from './ReloadDataLink';
 
@@ -13,7 +14,7 @@ const forecastState = (weatherData, isFectingForecast, selectedCity, onGetForeca
     return (
       <div style={divStyle}>
         <h3>{getCityNameById(selectedCity)} 天氣預報</h3>
-        <span>{'取得天氣預報資料中...'}</span>
+        <span><CircularProgress size={20} /></span>
       </div>
     );
   } else if (!isFectingForecast && !weatherData.forecast) {
@@ -62,7 +63,6 @@ const AppWeather = ({
       <div>
         {forecastState(weatherData,
           isFectingForecast, selectedCity, onGetForecastData)}
-        <hr/>
       </div>
     )
 };

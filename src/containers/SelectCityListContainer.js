@@ -4,8 +4,8 @@ import cityIdList from '../constants/cityIdList'
 import SelectCityList from '../components/SelectCityList';
 
 const mapDispatchToProps = (dispatch) => ({
-    onSelectCity: (e) => {
-      const cityId = e.target.value;
+    onSelectCity: (e, key, playload) => {
+      const cityId = playload.toString();
       dispatch(selectCity(cityId));
       
       if (cityId) {
@@ -15,7 +15,13 @@ const mapDispatchToProps = (dispatch) => ({
     }
 });
 
+const mapStatsToProps = (state) => {
+  return {
+    selectedCity: state.weather.selectedCity     
+  }
+};
+
 export default connect(
-    null,
+    mapStatsToProps,
     mapDispatchToProps,
 )(SelectCityList);

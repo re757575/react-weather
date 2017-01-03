@@ -1,6 +1,12 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
+import RaisedButton from 'material-ui/RaisedButton';
+import ActionAndroid from 'material-ui/svg-icons/action/search';
 import { getCurrentWeatherData, getForecastData } from '../actions';
+
+const style = {
+  marginTop: '50px'
+}
 
 export const FeachBtn = ({
   selectedCity,
@@ -14,7 +20,13 @@ export const FeachBtn = ({
 
   return (
     <div>
-      <button disabled={!selectedCity} onClick={handleGetWeatherData}>查詢</button> 
+      <RaisedButton
+        disabled={!selectedCity}
+        onTouchTap={handleGetWeatherData}
+        label="查詢"
+        style={style}
+        icon={<ActionAndroid />}
+      />
     </div>
   );
 };
