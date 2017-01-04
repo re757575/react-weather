@@ -2,7 +2,7 @@ import React, { PropTypes } from 'react';
 import CircularProgress from 'material-ui/CircularProgress';
 import cityList, { getCityNameById } from '../constants/cityIdList.js';
 import ReloadDataLink from './ReloadDataLink';
-import {Card, CardActions, CardHeader, CardText} from 'material-ui/Card';
+import { Card, CardActions, CardHeader, CardText } from 'material-ui/Card';
 import FlatButton from 'material-ui/FlatButton';
 import ActionAutorenew from 'material-ui/svg-icons/action/autorenew';
 import Divider from 'material-ui/Divider';

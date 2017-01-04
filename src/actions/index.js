@@ -5,7 +5,9 @@ import {
   REQUEST_FORECAST,
   FETCH_WEATHER,
   FETCH_FORECAST,
-  SELECT_CITY
+  SELECT_CITY,
+  CHANGE_TO_OFFLINE,
+  CHANGE_TO_ONLINE,
 } from '../constants/actionTypes';
 
 export const requstWeather = function() {
@@ -74,3 +76,15 @@ export const selectCity = function(cityId) {
     cityId: cityId
   };
 };
+
+export const changeOfflineStatus = function(isOffline) {
+  if (isOffline) {
+    return {
+      type: CHANGE_TO_OFFLINE
+    }
+  } else {
+    return {
+      type: CHANGE_TO_ONLINE
+    }
+  }
+}

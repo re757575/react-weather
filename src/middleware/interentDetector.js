@@ -1,15 +1,18 @@
-import { REQUEST_WEATHER, REQUEST_FORECAST } from '../actions';
+import { REQUEST_WEATHER, REQUEST_FORECAST } from '../constants/actionTypes';
+import { changeOfflineStatus } from '../actions';
 
 const interentDetector = store => next => action => {
 
   if (action.type === REQUEST_WEATHER ||
       action.type === REQUEST_FORECAST) {
     if (!navigator.onLine) {
-      alert('網路連線已斷開。');
+      store.dispatch(changeOfflineStatus(true));
       throw new Error('INTERNET DISCONNECTED.');
+    } else {
+      store.dispatch(changeOfflineStatus(false));
     }
   }
-  
+
   let result = next(action);
   return result;
 }

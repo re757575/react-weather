@@ -4,6 +4,7 @@ import SelectCityList from '../containers/SelectCityListContainer';
 import Weather from '../containers/WeatherContainer';
 import Forecast from '../containers/ForecastContainer';
 import FeachBtn from './FeachBtn';
+import ConnectionStatus from './ConnectionStatus';
 import Dialog from 'material-ui/Dialog';
 import IconMenu from 'material-ui/IconMenu';
 import IconButton from 'material-ui/IconButton';
@@ -89,6 +90,7 @@ class App extends Component {
           >
             <span>React + Redux + WebPack + Material UI</span>
           </Dialog>
+          <ConnectionStatus/>
         </div>
     );
   }
