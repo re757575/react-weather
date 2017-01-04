@@ -13,6 +13,7 @@ import MenuItem from 'material-ui/MenuItem';
 import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert';
 import FloatingActionButton from 'material-ui/FloatingActionButton';
 import ContentAdd from 'material-ui/svg-icons/content/add';
+import CircularProgress from 'material-ui/CircularProgress';
 
 const fabStyle = {
     margin: 0,
@@ -27,7 +28,17 @@ class App extends Component {
 
   state = {
     aboutOpen: false,
+    appLoading: true
   };
+
+  componentWillMount() {
+  }
+
+  componentDidMount() {
+    setTimeout(() => {      
+      this.setState({appLoading: false});
+    }, 500);
+  }
 
   handleOpenAbout = () => {
     this.setState({aboutOpen: true});
@@ -62,6 +73,7 @@ class App extends Component {
       />,
     ];
 
+
     return (
       <div>
           <AppBar
@@ -69,10 +81,15 @@ class App extends Component {
             iconElementRight={optionsList()}
           />
           <div id="container">
-            <SelectCityList/>
-            <FeachBtn/>
-            <Weather/>
-            <Forecast/>
+            <div className={this.state.appLoading ? 'hidden' : 'faded'}>
+              <SelectCityList/>
+              <FeachBtn/>
+              <Weather/>
+              <Forecast/>
+            </div>
+            <CircularProgress size={80}
+              style={this.state.appLoading ? {position: 'absolute'} : {display: 'none'}}
+              className="center"/>
           </div>
           <FloatingActionButton
             style={fabStyle}

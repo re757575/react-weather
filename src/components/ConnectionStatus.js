@@ -34,9 +34,7 @@ class ConnectionStatus extends Component {
 
   handleOpen = () => {
     this.setState({open: true});
-    setTimeout(() => {
-      this.setState({clickedClose: false});
-    }, 10000);
+
   };
 
   handleActionTouchTap = () => {
