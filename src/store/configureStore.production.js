@@ -3,7 +3,7 @@ import thunk from 'redux-thunk'
 import rootReducer from '../reducers';
 import interentDetector from '../middleware/interentDetector';
 
-const enhancer = applyMiddleware(interentDetector, thunk);
+const enhancer = applyMiddleware(thunk);
 
 export default function configureStore(initialState) {
   // Note: only Redux >= 3.1.0 supports passing enhancer as third argument.
