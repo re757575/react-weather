@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import AppBar from 'material-ui/AppBar';
+import { version as AppVersion } from '../../package.json';
 import SelectCityList from '../containers/SelectCityListContainer';
 import Weather from '../containers/WeatherContainer';
 import Forecast from '../containers/ForecastContainer';
@@ -99,7 +100,7 @@ class App extends Component {
             <ContentAdd/>
           </FloatingActionButton>
           <Dialog
-            title={`關於 ${appTitle}`}
+            title={`${appTitle} ${AppVersion}`}
             actions={dialogActions}
             modal={false}
             open={this.state.aboutOpen}

@@ -52,13 +52,10 @@ module.exports = {
     })
   ],
   module: {
-    loaders: [{
-      test: /\.js$/,
-      loaders: ['babel'],
-      include: path.join(__dirname, 'src')
-    },{
-      test: /\.css$/, // Only .css files
-      loader: 'style!css' // Run both loaders
-    }]
+    loaders: [
+      { test: /\.js$/, loaders: ['react-hot', 'babel'], include: path.join(__dirname, 'src') },
+      { test: /\.css$/, loader: 'style!css' },
+      { test: /\.json$/, loader: 'json-loader' }
+    ]
   }
 };
