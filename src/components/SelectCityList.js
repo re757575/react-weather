@@ -1,5 +1,4 @@
 import React, { PropTypes } from 'react';
-import { connect } from 'react-redux';
 import SelectField from 'material-ui/SelectField';
 import MenuItem from 'material-ui/MenuItem';
 import cityIdList, { getCityNameById } from '../constants/cityIdList';
@@ -25,7 +24,6 @@ const SelectCityList = ({selectedCity, onSelectCity}) => (
     >
       {options}
     </SelectField>
-
   </div>
 );
 

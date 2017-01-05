@@ -1,3 +1,6 @@
+import injectTapEventPlugin from 'react-tap-event-plugin';
+injectTapEventPlugin();
+
 module.exports = () => {
   const jsdom = require('jsdom').jsdom;
 

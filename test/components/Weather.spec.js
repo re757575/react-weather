@@ -1,14 +1,17 @@
 import { expect } from 'chai';
 import { spy } from 'sinon'
-import React from 'react';
-import { shallow } from 'enzyme';
+import React, { PropTypes } from 'react';
+import { shallow, mount } from 'enzyme';
 import Weather from '../../src/components/Weather';
 import cityIdList from '../../src/constants/cityIdList';
 import { getCityNameById } from '../../src/constants/cityIdList';
+import getMuiTheme from 'material-ui/styles/getMuiTheme';
 
 const CITY_ID = Object.keys(cityIdList[1]).toString();
 
 function setup() {
+  const muiTheme = getMuiTheme();
+
   const props = {
     weatherData: {
       current: null
@@ -18,7 +21,12 @@ function setup() {
     onGetCurrentWeatherData: spy()
   }
 
-  const wrapper = shallow(<Weather {...props} />);
+  const wrapper = mount(
+    <Weather {...props} />, {
+      context: {muiTheme},
+      childContextTypes: {muiTheme: React.PropTypes.object}
+    }
+  );
 
   return {
     props,
@@ -26,13 +34,31 @@ function setup() {
   }
 }
 
-describe('<Weather /> testing', () => {
-  it('should no data', () => {
-    const { wrapper } = setup();
-    const div = wrapper.find('h3');
+describe('', () => {
+  
+});('<Weather /> testing', () => {
 
-    expect(wrapper.find('h3').text()).contains('目前天氣');
-    expect(wrapper.find('span').text()).to.be.equal('無資料');
+  it('should have props', () => {
+    const { props, wrapper } = setup();
+
+    expect(wrapper.props()).to.deep.equal(props);
+  })
+  
+  it('should no data', () => {
+    let CITY_ID = '';
+    const { wrapper } = setup();
+    const Card = wrapper.find('Card');
+    const CardHeader = wrapper.find('CardHeader');
+    const CardText = wrapper.find('CardText');
+
+    expect(Card.exists()).to.be.true;
+
+    expect(CardHeader.exists()).to.be.true;
+    expect(CardHeader.prop('title')).to.be.equal(getCityNameById(CITY_ID));
+    expect(CardHeader.prop('subtitle')).to.be.equal('目前天氣');
+
+    expect(CardText.exists()).to.be.true;
+    expect(CardText.find('span').text()).to.be.equal('無資料');
   });
 
   it('should loading', () => {
@@ -43,8 +69,17 @@ describe('<Weather /> testing', () => {
       isFectingWeather: true
     })
 
-    expect(wrapper.find('h3').text()).to.be.equal(`${getCityNameById(CITY_ID)} 目前天氣`);
-    expect(wrapper.find('span').text()).to.be.equal('取得目前天氣資料中...');
+    const Card = wrapper.find('Card');
+    const CardHeader = wrapper.find('CardHeader');
+    const CardText = wrapper.find('CardText');
+
+    expect(Card.exists()).to.be.true;
+
+    expect(CardHeader.exists()).to.be.true;
+    expect(CardHeader.prop('title')).to.be.equal(getCityNameById(CITY_ID));
+    expect(CardHeader.prop('subtitle')).to.be.equal('目前天氣');
+
+    expect(wrapper.find('circle')).to.have.length(1);
   });
 
   it('should show data', () => {
@@ -70,14 +105,29 @@ describe('<Weather /> testing', () => {
       weatherData 
     });
 
-    expect(wrapper.find('h3').text()).to.be.equal(`${getCityNameById(CITY_ID)} 目前天氣`);
-    expect(wrapper.find('ReloadDataLink').exists()).to.be.true;
-    expect(wrapper.find('ReloadDataLink').prop('reloadType')).to.be.equal('weather')
-    expect(wrapper.find('ReloadDataLink').prop('selectedCity')).to.be.equal(CITY_ID)
-    expect(wrapper.find('ReloadDataLink').prop('onReload')).to.be.functon;
-    expect(wrapper.find('ul').exists()).to.be.true;
-    expect(wrapper.find('li')).to.have.length(5);
-    expect(wrapper.find('li').get(0).props.children[1])
-      .to.be.equal(weatherData.current.name);
+    const Card = wrapper.find('Card');
+    const CardHeader = wrapper.find('CardHeader');
+    const FlatButton = wrapper.find('FlatButton');
+    const CardActions = wrapper.find('CardActions');
+    const CardText = wrapper.find('CardText');
+
+    expect(Card.exists()).to.be.true;
+
+    expect(CardHeader.exists()).to.be.true;
+    expect(CardHeader.prop('title')).to.be.equal(getCityNameById(CITY_ID));
+    expect(CardHeader.prop('subtitle')).to.be.equal('目前天氣');
+
+    expect(CardActions.exists()).to.be.true;
+
+    expect(FlatButton.exists()).to.be.true;
+    expect(FlatButton.prop('label')).to.be.equal('重新讀取');
+    expect(FlatButton.prop('onTouchTap')).to.be.function;
+    expect(FlatButton.prop('disabled')).to.be.false;
+
+    expect(CardText.exists()).to.be.true;
+    expect(CardText.find('ul')).to.have.length(1);
+
+    // loading false
+    expect(wrapper.find('circle')).to.have.length(0);
   });
 });

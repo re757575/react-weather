@@ -7,7 +7,7 @@
     "start": "node server.js",
     "build": "webpack -p --progress --config webpack.production.config.js",
     "lint": "./node_modules/.bin/eslint src",
-    "test": "mocha --compilers js:babel-core/register --recursive",
+    "test": "mocha --compilers js:babel-core/register --recursive -r jsdom-global/register --require ./test/setup.js",
     "test:watch": "npm test -- --watch"
   },
   "repository": {
@@ -31,6 +31,7 @@
     "eslint-plugin-react": "^6.7.1",
     "html-webpack-plugin": "^2.24.1",
     "jsdom": "^9.9.1",
+    "jsdom-global": "2.1.1",
     "json-loader": "^0.5.4",
     "mocha": "^3.2.0",
     "nock": "^9.0.2",
