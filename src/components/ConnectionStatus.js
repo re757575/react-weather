@@ -1,8 +1,6 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import Dialog from 'material-ui/Dialog';
 import Snackbar from 'material-ui/Snackbar';
-import FlatButton from 'material-ui/FlatButton';
 
 class ConnectionStatus extends Component {
   constructor(props) {
@@ -12,10 +10,12 @@ class ConnectionStatus extends Component {
       open: false,
       clickedClose: false,
       intervalId: null
-    }
+    };
   }
 
-  componentDidMount() {
+  // https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/no-did-mount-set-state.md
+  // https://github.com/airbnb/javascript/issues/684#issuecomment-264094930
+  componentWillMount() {
     const intervalId = setInterval(() => {
       if (!navigator.onLine && !this.state.open && !this.state.clickedClose) {
         this.handleOpen();
@@ -25,7 +25,12 @@ class ConnectionStatus extends Component {
       }
     }, 1000);
 
-    this.setState({intervalId});
+    this.setState({ intervalId });
+  }
+
+  // 在 componentDidMount 使用 setState 將會重複執行 render,
+  // 可能會導致 property/layout thrashing
+  componentDidMount() {
   }
 
   componentWillUnmount() {
@@ -33,9 +38,8 @@ class ConnectionStatus extends Component {
   }
 
   handleOpen = () => {
-    this.setState({open: true});
-
-  };
+    this.setState({ open: true });
+  }
 
   handleActionTouchTap = () => {
     this.setState({
@@ -45,7 +49,7 @@ class ConnectionStatus extends Component {
   }
 
   handleReload = () => {
-    location.reload()
+    location.reload();
   };
 
   handleRequestClose = () => {
@@ -71,10 +75,8 @@ class ConnectionStatus extends Component {
   }
 }
 
-const mapStatsToProps = (state) => {
-  return {
-    isOffline: state.system.isOffline     
-  }
-}
+const mapStatsToProps = (state) => ({
+  isOffline: state.system.isOffline
+});
 
 export default connect(mapStatsToProps, null)(ConnectionStatus);

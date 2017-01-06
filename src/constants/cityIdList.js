@@ -9,7 +9,7 @@ const cityIdList = [
     1668399: '台中'
   },
   {
-    1668355 : '台南'
+    1668355: '台南'
   },
   {
     1673820: '高雄'
@@ -19,16 +19,16 @@ const cityIdList = [
 export default cityIdList;
 
 export const getCityNameById = cityId => {
-
   if (!cityId) {
     return '';
   }
 
-  var obj = cityIdList.filter(function ( obj ) {
-      if (Object.keys(obj).toString() === cityId.toString()) {
-        return true;
-      }
+  const cityObj = cityIdList.filter((obj) => {
+    if (Object.keys(obj).toString() === cityId.toString()) {
+      return true;
+    }
+    return false;
   })[0];
 
-  return obj[cityId] ? obj[cityId] : '';
+  return cityObj[cityId] ? cityObj[cityId] : '';
 };

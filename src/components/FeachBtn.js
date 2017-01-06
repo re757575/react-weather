@@ -6,17 +6,13 @@ import { getCurrentWeatherData, getForecastData } from '../actions';
 
 const style = {
   marginTop: '50px'
-}
+};
 
-export const FeachBtn = ({
-  selectedCity,
-  onGetCurrentWeatherData,
-  onGetForecastData }) => {
-
+export const FeachBtn = ({ selectedCity, onGetCurrentWeatherData, onGetForecastData }) => {
   const handleGetWeatherData = () => {
     onGetCurrentWeatherData(selectedCity);
     onGetForecastData(selectedCity);
-  }
+  };
 
   return (
     <div>
@@ -33,26 +29,26 @@ export const FeachBtn = ({
 
 FeachBtn.propTypes = {
   selectedCity: PropTypes.string,
-  onGetCurrentWeatherData: PropTypes.func.isRequired ,
+  onGetCurrentWeatherData: PropTypes.func.isRequired,
   onGetForecastData: PropTypes.func.isRequired
 };
 
 const mapDispatchToProps = (dispatch) => ({
-    onGetCurrentWeatherData: (cityId) => {
-      if (!cityId) return false;
+  onGetCurrentWeatherData: (cityId) => {
+    if (cityId) {
       dispatch(getCurrentWeatherData(cityId));
-    },
-    onGetForecastData: (cityId) => {
-      if (!cityId) return false;
+    }
+  },
+  onGetForecastData: (cityId) => {
+    if (cityId) {
       dispatch(getForecastData(cityId));
     }
+  }
 });
 
-const mapStatsToProps = (state) => {
-  return {
-    selectedCity: state.weather.selectedCity     
-  }
-};
+const mapStatsToProps = (state) => ({
+  selectedCity: state.weather.selectedCity
+});
 
 export default connect(
     mapStatsToProps,

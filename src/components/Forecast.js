@@ -1,15 +1,13 @@
 import React, { PropTypes } from 'react';
 import CircularProgress from 'material-ui/CircularProgress';
-import cityList, { getCityNameById } from '../constants/cityIdList.js';
-import ReloadDataLink from './ReloadDataLink';
 import { Card, CardActions, CardHeader, CardText } from 'material-ui/Card';
 import FlatButton from 'material-ui/FlatButton';
 import ActionAutorenew from 'material-ui/svg-icons/action/autorenew';
 import Divider from 'material-ui/Divider';
+import { getCityNameById } from '../constants/cityIdList';
 
 const forecastState = (weatherData, isFectingForecast, selectedCity, onGetForecastData) => {
-
-  let divStyle = {
+  const divStyle = {
     marginTop: '20px',
     pointerEvents: !selectedCity ? 'none' : ''
   };
@@ -23,7 +21,7 @@ const forecastState = (weatherData, isFectingForecast, selectedCity, onGetForeca
             subtitle="天氣預報"
           />
           <CardText>
-            <span><CircularProgress size={20}/></span>
+            <span><CircularProgress size={20} /></span>
           </CardText>
         </Card>
       </div>
@@ -44,9 +42,9 @@ const forecastState = (weatherData, isFectingForecast, selectedCity, onGetForeca
     );
   }
 
-  const list = weatherData.forecast.list.map((v, k) => {
-    return (<div key={k}>
-      <ul style={{listStyleType: 'none', lineHeight: '25px'}}>
+  const list = weatherData.forecast.list.map((v, k) =>
+    <div key={k}>
+      <ul style={{ listStyleType: 'none', lineHeight: '25px' }}>
         <li>天氣: {v.weather[0].description}</li>
         <li>
           溫度: {Math.floor(v.main.temp)} ({v.main.temp_min}~{v.main.temp_max})℃
@@ -55,9 +53,9 @@ const forecastState = (weatherData, isFectingForecast, selectedCity, onGetForeca
         <li>陣風: {v.wind.speed} m/s</li>
         <li>{v.dt_txt}</li>
       </ul>
-      <Divider/>
-    </div>);
-  });
+      <Divider />
+    </div>
+);
 
   return (
     <div style={divStyle}>
@@ -70,12 +68,12 @@ const forecastState = (weatherData, isFectingForecast, selectedCity, onGetForeca
           <FlatButton
             label="重新讀取"
             labelPosition="before"
-            primary={true}
+            primary
             icon={<ActionAutorenew />}
             onTouchTap={() => onGetForecastData(selectedCity)}
           />
         </CardActions>
-        <CardText style={{padding: '5px'}}>
+        <CardText style={{ padding: '5px' }}>
           {list}
         </CardText>
       </Card>
@@ -88,21 +86,17 @@ const AppWeather = ({
     selectedCity,
     isFectingForecast,
     onGetForecastData,
-  }) => {
-
-    return (
-      <div>
-        {forecastState(weatherData,
-          isFectingForecast, selectedCity, onGetForecastData)}
-      </div>
-    )
-};
+  }) => (
+    <div>
+      {forecastState(weatherData, isFectingForecast, selectedCity, onGetForecastData)}
+    </div>
+);
 
 AppWeather.propTypes = {
-  weatherData: PropTypes.object,
+  weatherData: PropTypes.object, // eslint-disable-line react/forbid-prop-types
   selectedCity: PropTypes.string,
   isFectingForecast: PropTypes.bool.isRequired,
   onGetForecastData: PropTypes.func.isRequired
-}
+};
 
 export default AppWeather;

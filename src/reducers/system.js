@@ -8,9 +8,6 @@ const defaultState = {
 };
 
 const system = (state = defaultState, action) => {
-
-console.log(action.type);
-
   switch (action.type) {
     case CHANGE_TO_OFFLINE:
       return {

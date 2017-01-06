@@ -10,27 +10,25 @@ import {
   CHANGE_TO_ONLINE,
 } from '../constants/actionTypes';
 
-export const requstWeather = function() {
-  return {
+export const requstWeather = () => (
+  {
     type: REQUEST_WEATHER
   }
-};
+);
 
-export const requstForecast = function() {
-  return {
+export const requstForecast = () => (
+  {
     type: REQUEST_FORECAST
   }
-};
+);
 
-export const getCurrentWeatherData = function(cityId) {
-
+export const getCurrentWeatherData = (cityId) => {
   const APPID = '3a494cb65411295b23e82358cf4f07f6';
-  let url = `http://api.openweathermap.org/data/2.5/weather?id=${cityId}&APPID=${APPID}&units=metric&lang=zh_tw`;
+  const url = `http://api.openweathermap.org/data/2.5/weather?id=${cityId}&APPID=${APPID}&units=metric&lang=zh_tw`;
 
   // https://github.com/reactjs/redux/issues/1676
   // Redux Thunk will inject dispatch here
   return dispatch => {
-
     // flag isFecting = true
     dispatch(requstWeather());
 
@@ -43,17 +41,15 @@ export const getCurrentWeatherData = function(cityId) {
           });
         })
         .catch(ex => console.log('parsing failed', ex));
-  }
+  };
 };
 
-export const getForecastData = function(cityId) {
-
+export const getForecastData = (cityId) => {
   const APPID = '3a494cb65411295b23e82358cf4f07f6';
   const count = 9;
-  let url = `http://api.openweathermap.org/data/2.5/forecast?id=${cityId}&APPID=${APPID}&cnt=${count}&units=metric&lang=zh_tw`;
+  const url = `http://api.openweathermap.org/data/2.5/forecast?id=${cityId}&APPID=${APPID}&cnt=${count}&units=metric&lang=zh_tw`;
 
   return dispatch => {
-
     dispatch(requstForecast());
 
     return fetch(url)
@@ -67,24 +63,24 @@ export const getForecastData = function(cityId) {
           }, 200);
         })
         .catch(ex => console.log('parsing failed', ex));
-  }
-}
-
-export const selectCity = function(cityId) {  
-  return {
-    type: SELECT_CITY,
-    cityId: cityId
   };
 };
 
-export const changeOfflineStatus = function(isOffline) {
+export const selectCity = (cityId) => (
+  {
+    type: SELECT_CITY,
+    cityId
+  }
+);
+
+export const changeOfflineStatus = (isOffline) => {
   if (isOffline) {
     return {
       type: CHANGE_TO_OFFLINE
-    }
-  } else {
-    return {
-      type: CHANGE_TO_ONLINE
-    }
+    };
   }
-}
+
+  return {
+    type: CHANGE_TO_ONLINE
+  };
+};

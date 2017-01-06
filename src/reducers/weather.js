@@ -17,7 +17,6 @@ const defaultState = {
 };
 
 const weather = (state = defaultState, action) => {
-
   switch (action.type) {
     case REQUEST_WEATHER:
       return {

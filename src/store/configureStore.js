@@ -1,12 +1,5 @@
-import devConfig from './configureStore.development';
-import prodConfig from './configureStore.production';
-
-let loadedStore = null;
-
 if (process.env.NODE_ENV === 'production') {
-  loadedStore = prodConfig;
+  module.exports = require('./configureStore.production'); // eslint-disable-line global-require
 } else {
-  loadedStore = devConfig;
+  module.exports = require('./configureStore.development'); // eslint-disable-line global-require
 }
-
-export default loadedStore;

@@ -3,19 +3,18 @@ import { getCurrentWeatherData } from '../actions';
 import Weather from '../components/Weather';
 
 const mapDispatchToProps = (dispatch) => ({
-    onGetCurrentWeatherData: (cityId) => {
-      if (!cityId) return false;
+  onGetCurrentWeatherData: (cityId) => {
+    if (cityId) {
       dispatch(getCurrentWeatherData(cityId));
     }
+  }
 });
 
-const mapStatsToProps = (state) => {
-  return {
-    weatherData: state.weather.data,
-    isFectingWeather: state.weather.isFectingWeather,
-    selectedCity: state.weather.selectedCity     
-  }
-};
+const mapStatsToProps = (state) => ({
+  weatherData: state.weather.data,
+  isFectingWeather: state.weather.isFectingWeather,
+  selectedCity: state.weather.selectedCity
+});
 
 export default connect(
     mapStatsToProps,

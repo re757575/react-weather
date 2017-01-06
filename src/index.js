@@ -1,9 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
+import { install, applyUpdate } from 'offline-plugin/runtime';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import injectTapEventPlugin from 'react-tap-event-plugin';
-import rootReducer from './reducers'
 import configureStore from './store/configureStore';
 import App from './components/App';
 import './main.css';
@@ -17,13 +17,11 @@ const store = configureStore();
 ReactDOM.render(
   <Provider store={store}>
     <MuiThemeProvider>
-      <App/>
+      <App />
     </MuiThemeProvider>
   </Provider>,
   document.getElementById('root')
 );
-
-import { install, applyUpdate } from 'offline-plugin/runtime';
 
 install({
   onUpdateReady: () => applyUpdate()
