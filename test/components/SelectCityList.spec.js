@@ -1,10 +1,9 @@
 import { expect } from 'chai';
 import { spy } from 'sinon';
-import React, { PropTypes } from 'react';
-import { shallow, mount, render } from 'enzyme';
-import SelectCityList from '../../src/components/SelectCityList';
-import { getCityNameById } from '../../src/constants/cityIdList';
+import React from 'react';
+import { mount } from 'enzyme';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
+import SelectCityList from '../../src/components/SelectCityList';
 
 function setup() {
   const muiTheme = getMuiTheme();
@@ -12,28 +11,27 @@ function setup() {
   const props = {
     selectedCity: '',
     onSelectCity: spy()
-  }
+  };
 
   const wrapper = mount(
     <SelectCityList {...props} />, {
-      context: {muiTheme},
-      childContextTypes: {muiTheme: React.PropTypes.object}
+      context: { muiTheme },
+      childContextTypes: { muiTheme: React.PropTypes.object }
     }
   );
 
   return {
     props,
     wrapper
-  }
+  };
 }
 
 describe('<SelectCityList /> testing', () => {
-
   it('should have props', () => {
     const { props, wrapper } = setup();
 
     expect(wrapper.props()).to.deep.equal(props);
-  })
+  });
 
   it.skip('should have an select', () => {
     const { wrapper } = setup();
@@ -41,7 +39,7 @@ describe('<SelectCityList /> testing', () => {
     // FIXME: MenuItem not found
     console.log(wrapper.html());
 
-    const options = wrapper.find('SelectField').children();
+    // const options = wrapper.find('SelectField').children();
 
     const SelectField = wrapper.find('SelectField');
     const MenuItem = wrapper.find('MenuItem');
@@ -67,7 +65,7 @@ describe('<SelectCityList /> testing', () => {
     const wrapper = mount(<SelectCityList {...props} />);
     const select = wrapper.find('select');
 
-    select.simulate('change', {target: { value : '1668341'}});
+    select.simulate('change', { target: { value: '1668341' } });
 
     expect(props.onSelectCity.called).to.be.true;
 

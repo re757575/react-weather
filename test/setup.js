@@ -1,8 +1,9 @@
 import injectTapEventPlugin from 'react-tap-event-plugin';
+
 injectTapEventPlugin();
 
 module.exports = () => {
-  const jsdom = require('jsdom').jsdom;
+  const jsdom = require('jsdom').jsdom; // eslint-disable-line global-require
 
   global.document = jsdom('');
   global.window = document.defaultView;

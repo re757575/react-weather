@@ -3,7 +3,7 @@ import configureMockStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 import nock from 'nock';
 
-import cityIdList from '../../src/constants/cityIdList';
+import { cityIdList } from '../../src/constants/cityIdList';
 import * as types from '../../src/constants/actionTypes';
 import * as actions from '../../src/actions/index';
 
@@ -15,7 +15,6 @@ const middlewares = [thunk];
 const mockStore = configureMockStore(middlewares);
 
 describe('actions testing', () => {
-
   afterEach(() => {
     nock.cleanAll();
   });

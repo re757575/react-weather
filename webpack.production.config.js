@@ -1,10 +1,10 @@
-var path = require('path');
-var util = require('util');
-var webpack = require('webpack');
-var HtmlWebpackPlugin = require('html-webpack-plugin');
-var CleanWebpackPlugin = require('clean-webpack-plugin');
-var CopyWebpackPlugin = require('copy-webpack-plugin');
-var OfflinePlugin = require('offline-plugin');
+const path = require('path');
+const util = require('util');
+const webpack = require('webpack');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const CleanWebpackPlugin = require('clean-webpack-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
+const OfflinePlugin = require('offline-plugin');
 
 const pkg = require('./package.json');
 

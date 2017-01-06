@@ -3,7 +3,6 @@ import weather from '../../src/reducers/weather';
 import * as types from '../../src/constants/actionTypes';
 
 describe('weather reducer testing', () => {
-
   let preState;
 
   beforeEach(() => {
@@ -14,7 +13,7 @@ describe('weather reducer testing', () => {
       data: {
         current: null,
         forecast: null
-      } 
+      }
     };
   });
 
@@ -26,7 +25,7 @@ describe('weather reducer testing', () => {
       data: {
         current: null,
         forecast: null
-      } 
+      }
     };
 
     expect(
@@ -37,8 +36,8 @@ describe('weather reducer testing', () => {
   it('should handle REQUEST_WEATHER', () => {
     const expectedState = {
       ...preState,
-      isFectingWeather: true,      
-    }
+      isFectingWeather: true,
+    };
     expect(
       weather(preState, {
         type: types.REQUEST_WEATHER
@@ -49,8 +48,8 @@ describe('weather reducer testing', () => {
   it('should handle REQUEST_FORECAST', () => {
     const expectedState = {
       ...preState,
-      isFectingForecast: true,      
-    }
+      isFectingForecast: true,
+    };
     expect(
       weather(preState, {
         type: types.REQUEST_FORECAST
@@ -61,9 +60,9 @@ describe('weather reducer testing', () => {
   it('should handle FETCH_WEATHER', () => {
     const expectedState = {
       ...preState,
-      isFectingWeather: false,      
+      isFectingWeather: false,
       data: { current: {}, forecast: preState.data.forecast }
-    }
+    };
 
     expect(
       weather(preState, {
@@ -76,9 +75,9 @@ describe('weather reducer testing', () => {
   it('should handle FETCH_FORECAST', () => {
     const expectedState = {
       ...preState,
-      isFectingForecast: false,      
+      isFectingForecast: false,
       data: { current: preState.data.current, forecast: {} }
-    }
+    };
 
     expect(
       weather(preState, {
@@ -94,12 +93,12 @@ describe('weather reducer testing', () => {
       ...preState,
       selectedCity: cityId,
       data: { current: null, forecast: null }
-    }
+    };
 
     expect(
       weather(preState, {
         type: types.SELECT_CITY,
-        cityId: cityId
+        cityId
       })
     ).to.deep.equal(expectedState);
   });

@@ -1,11 +1,10 @@
 import { expect } from 'chai';
-import { spy } from 'sinon'
-import React, { PropTypes } from 'react';
-import { shallow, mount } from 'enzyme';
-import Weather from '../../src/components/Weather';
-import cityIdList from '../../src/constants/cityIdList';
-import { getCityNameById } from '../../src/constants/cityIdList';
+import { spy } from 'sinon';
+import React from 'react';
+import { mount } from 'enzyme';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
+import Weather from '../../src/components/Weather';
+import { cityIdList, getCityNameById } from '../../src/constants/cityIdList';
 
 const CITY_ID = Object.keys(cityIdList[1]).toString();
 
@@ -19,42 +18,42 @@ function setup() {
     selectedCity: '',
     isFectingWeather: false,
     onGetCurrentWeatherData: spy()
-  }
+  };
 
   const wrapper = mount(
     <Weather {...props} />, {
-      context: {muiTheme},
-      childContextTypes: {muiTheme: React.PropTypes.object}
+      context: { muiTheme },
+      childContextTypes: { muiTheme: React.PropTypes.object }
     }
   );
 
   return {
     props,
     wrapper
-  }
+  };
 }
 
-describe('', () => {
-  
-});('<Weather /> testing', () => {
-
+describe('<Weather /> testing', () => {
   it('should have props', () => {
     const { props, wrapper } = setup();
 
     expect(wrapper.props()).to.deep.equal(props);
-  })
-  
+  });
+
   it('should no data', () => {
-    let CITY_ID = '';
     const { wrapper } = setup();
     const Card = wrapper.find('Card');
     const CardHeader = wrapper.find('CardHeader');
     const CardText = wrapper.find('CardText');
 
+    wrapper.setProps({
+      selectedCity: '',
+    });
+
     expect(Card.exists()).to.be.true;
 
     expect(CardHeader.exists()).to.be.true;
-    expect(CardHeader.prop('title')).to.be.equal(getCityNameById(CITY_ID));
+    expect(CardHeader.prop('title')).to.be.equal(getCityNameById(''));
     expect(CardHeader.prop('subtitle')).to.be.equal('目前天氣');
 
     expect(CardText.exists()).to.be.true;
@@ -67,7 +66,7 @@ describe('', () => {
     wrapper.setProps({
       selectedCity: CITY_ID,
       isFectingWeather: true
-    })
+    });
 
     const Card = wrapper.find('Card');
     const CardHeader = wrapper.find('CardHeader');
@@ -79,7 +78,7 @@ describe('', () => {
     expect(CardHeader.prop('title')).to.be.equal(getCityNameById(CITY_ID));
     expect(CardHeader.prop('subtitle')).to.be.equal('目前天氣');
 
-    expect(wrapper.find('circle')).to.have.length(1);
+    expect(CardText.find('circle')).to.have.length(1);
   });
 
   it('should show data', () => {
@@ -95,14 +94,14 @@ describe('', () => {
           temp_max: 30,
           humidity: 60
         },
-        wind: { speed: 100 } 
+        wind: { speed: 100 }
       }
     };
 
     wrapper.setProps({
       selectedCity: CITY_ID,
       isFectingWeather: false,
-      weatherData 
+      weatherData
     });
 
     const Card = wrapper.find('Card');

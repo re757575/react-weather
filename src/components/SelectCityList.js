@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react';
 import SelectField from 'material-ui/SelectField';
 import MenuItem from 'material-ui/MenuItem';
-import cityIdList from '../constants/cityIdList';
+import { cityIdList } from '../constants/cityIdList';
 
 const style = {
   float: 'left',

@@ -1,4 +1,4 @@
-const cityIdList = [
+export const cityIdList = [
   {
     1668341: '台北'
   },
@@ -15,8 +15,6 @@ const cityIdList = [
     1673820: '高雄'
   }
 ];
-
-export default cityIdList;
 
 export const getCityNameById = cityId => {
   if (!cityId) {

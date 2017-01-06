@@ -1,13 +1,12 @@
 import { expect } from 'chai';
-import { spy } from 'sinon'
-import React, { PropTypes } from 'react';
-import { shallow, mount } from 'enzyme';
-import Forecast from '../../src/components/Forecast';
-import cityIdList from '../../src/constants/cityIdList';
-import { getCityNameById } from '../../src/constants/cityIdList';
+import { spy } from 'sinon';
+import React from 'react';
+import { mount } from 'enzyme';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
+import Forecast from '../../src/components/Forecast';
+import { cityIdList, getCityNameById } from '../../src/constants/cityIdList';
 
-let CITY_ID = Object.keys(cityIdList[1]).toString();
+const CITY_ID = Object.keys(cityIdList[1]).toString();
 
 function setup() {
   const muiTheme = getMuiTheme();
@@ -19,23 +18,22 @@ function setup() {
     selectedCity: '',
     isFectingForecast: false,
     onGetForecastData: spy()
-  }
+  };
 
   const wrapper = mount(
     <Forecast {...props} />, {
-      context: {muiTheme},
-      childContextTypes: {muiTheme: React.PropTypes.object}
+      context: { muiTheme },
+      childContextTypes: { muiTheme: React.PropTypes.object }
     }
   );
 
   return {
     props,
     wrapper
-  }
+  };
 }
 
 describe('<Forecast /> testing', () => {
-
   it('should have props', () => {
     const { props, wrapper } = setup();
 
@@ -43,16 +41,19 @@ describe('<Forecast /> testing', () => {
   });
 
   it('should no data', () => {
-    let CITY_ID = '';
     const { wrapper } = setup();
     const Card = wrapper.find('Card');
     const CardHeader = wrapper.find('CardHeader');
     const CardText = wrapper.find('CardText');
 
+    wrapper.setProps({
+      selectedCity: '',
+    });
+
     expect(Card.exists()).to.be.true;
 
     expect(CardHeader.exists()).to.be.true;
-    expect(CardHeader.prop('title')).to.be.equal(getCityNameById(CITY_ID));
+    expect(CardHeader.prop('title')).to.be.equal(getCityNameById(''));
     expect(CardHeader.prop('subtitle')).to.be.equal('天氣預報');
 
     expect(CardText.exists()).to.be.true;
@@ -77,17 +78,17 @@ describe('<Forecast /> testing', () => {
     expect(CardHeader.prop('title')).to.be.equal(getCityNameById(CITY_ID));
     expect(CardHeader.prop('subtitle')).to.be.equal('天氣預報');
 
-    expect(wrapper.find('circle')).to.have.length(1);
+    expect(CardText.find('circle')).to.have.length(1);
   });
 
   it('should show data', () => {
-    const { props, wrapper } = setup();
+    const { wrapper } = setup();
 
     const weatherData = {
       forecast: {
         list: [
           {
-            weather:[{ description: 'description' }],
+            weather: [{ description: 'description' }],
             main: {
               temp: 20,
               temp_min: 10,
@@ -97,7 +98,7 @@ describe('<Forecast /> testing', () => {
             wind: { speed: 100 }
           },
           {
-            weather:[{ description: 'description' }],
+            weather: [{ description: 'description' }],
             main: {
               temp: 20,
               temp_min: 10,
@@ -113,7 +114,7 @@ describe('<Forecast /> testing', () => {
     wrapper.setProps({
       selectedCity: CITY_ID,
       isFectingForecast: false,
-      weatherData 
+      weatherData
     });
 
     const Card = wrapper.find('Card');
