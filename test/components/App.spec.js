@@ -24,8 +24,8 @@ function setup() {
 }
 
 describe('<App />  testing', () => {
-  it('should have 5 children components', () => {
+  it('should have 6 children components', () => {
     const { wrapper } = setup();
-    expect(wrapper.children()).to.be.length(5);
+    expect(wrapper.children()).to.be.length(6);
   });
 });

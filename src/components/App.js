@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router';
 import AppBar from 'material-ui/AppBar';
 import Dialog from 'material-ui/Dialog';
+import Drawer from 'material-ui/Drawer';
 import IconMenu from 'material-ui/IconMenu';
 import IconButton from 'material-ui/IconButton';
 import FlatButton from 'material-ui/FlatButton';
@@ -9,13 +11,8 @@ import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert';
 import FloatingActionButton from 'material-ui/FloatingActionButton';
 import ContentAdd from 'material-ui/svg-icons/content/add';
 import CircularProgress from 'material-ui/CircularProgress';
-
 import { version as AppVersion } from '../../package.json';
 import ConnectionStatus from './ConnectionStatus';
-import SelectCityList from '../containers/SelectCityListContainer';
-import Weather from '../containers/WeatherContainer';
-import Forecast from '../containers/ForecastContainer';
-import FeachBtn from './FeachBtn'; // eslint-disable-line import/no-named-as-default
 
 const fabStyle = {
   margin: 0,
@@ -30,6 +27,7 @@ class App extends Component {
 
   state = {
     aboutOpen: false,
+    isDrawerOpen: false,
     appLoading: true
   };
 
@@ -49,6 +47,14 @@ class App extends Component {
   handleCloseAbout = () => {
     this.setState({ aboutOpen: false });
   };
+
+  handleDrawerToggle = () => {
+    this.setState({ isDrawerOpen: !this.state.isDrawerOpen });
+  }
+
+  handleDrawerClose = () => {
+    this.setState({ isDrawerOpen: false });
+  }
 
   render() {
     const appTitle = 'React Weather';
@@ -74,19 +80,16 @@ class App extends Component {
       />,
     ];
 
-
     return (
       <div>
         <AppBar
           title={appTitle}
           iconElementRight={optionsList()}
+          onLeftIconButtonTouchTap={this.handleDrawerToggle}
         />
         <div id="container">
           <div className={this.state.appLoading ? 'hidden' : 'faded'}>
-            <SelectCityList />
-            <FeachBtn />
-            <Weather />
-            <Forecast />
+            {this.props.children}
           </div>
           <CircularProgress
             size={80}
@@ -110,10 +113,27 @@ class App extends Component {
         >
           <span>React + Redux + WebPack + Material UI</span>
         </Dialog>
+        <Drawer
+          docked={false}
+          width={200}
+          open={this.state.isDrawerOpen}
+          onRequestChange={(open) => this.setState({ isDrawerOpen: open })}
+        >
+          <Link to="/">
+            <MenuItem onTouchTap={this.handleDrawerClose}>Index</MenuItem>
+          </Link>
+          <Link to="page2">
+            <MenuItem onTouchTap={this.handleDrawerClose}>Page2</MenuItem>
+          </Link>
+        </Drawer>
         <ConnectionStatus />
       </div>
     );
   }
 }
+
+App.propTypes = {
+  children: React.PropTypes.node
+};
 
 export default App;
