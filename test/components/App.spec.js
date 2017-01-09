@@ -13,7 +13,9 @@ function setup() {
   const wrapper = shallow(
     <App {...props} />, {
       context: { muiTheme },
-      childContextTypes: { muiTheme: React.PropTypes.object }
+      childContextTypes: {
+        muiTheme: React.PropTypes.object
+      }
     }
   );
 
@@ -24,8 +26,8 @@ function setup() {
 }
 
 describe('<App />  testing', () => {
-  it('should have 6 children components', () => {
+  it('should exists', () => {
     const { wrapper } = setup();
-    expect(wrapper.children()).to.be.length(6);
+    expect(wrapper.exists()).to.be.true;
   });
 });

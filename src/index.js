@@ -18,7 +18,11 @@ const store = configureStore();
 ReactDOM.render(
   <Provider store={store}>
     <MuiThemeProvider>
-      <Router history={hashHistory} routes={routes} />
+      <Router
+        history={hashHistory}
+        onUpdate={() => window.scrollTo(0, 0)}
+        routes={routes}
+      />
     </MuiThemeProvider>
   </Provider>,
   document.getElementById('root')
