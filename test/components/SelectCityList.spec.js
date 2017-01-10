@@ -9,6 +9,7 @@ function setup() {
   const muiTheme = getMuiTheme();
 
   const props = {
+    style: {},
     selectedCity: '',
     onSelectCity: spy()
   };

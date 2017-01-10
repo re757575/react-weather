@@ -28,6 +28,7 @@ class AppNavDrawer extends Component {
     onRequestChangeNavDrawer: PropTypes.func.isRequired,
     open: PropTypes.bool.isRequired,
     style: PropTypes.object, // eslint-disable-line react/forbid-prop-types
+    width: PropTypes.number,
   };
 
   static contextTypes = {
@@ -46,13 +47,14 @@ class AppNavDrawer extends Component {
       onChangeList,
       open,
       style,
+      width,
     } = this.props;
 
     return (
       <Drawer
         style={style}
         docked={docked}
-        width={200}
+        width={width}
         open={open}
         onRequestChange={onRequestChangeNavDrawer}
         containerStyle={{ zIndex: zIndex.drawer - 100 }}

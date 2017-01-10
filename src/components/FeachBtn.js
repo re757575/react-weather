@@ -4,11 +4,14 @@ import RaisedButton from 'material-ui/RaisedButton';
 import ActionAndroid from 'material-ui/svg-icons/action/search';
 import { getCurrentWeatherData, getForecastData } from '../actions';
 
-const style = {
-  marginTop: '50px'
-};
+export const FeachBtn = (props) => {
+  const {
+    style,
+    selectedCity,
+    onGetCurrentWeatherData,
+    onGetForecastData
+  } = props;
 
-export const FeachBtn = ({ selectedCity, onGetCurrentWeatherData, onGetForecastData }) => {
   const handleGetWeatherData = () => {
     onGetCurrentWeatherData(selectedCity);
     onGetForecastData(selectedCity);
@@ -28,6 +31,7 @@ export const FeachBtn = ({ selectedCity, onGetCurrentWeatherData, onGetForecastD
 };
 
 FeachBtn.propTypes = {
+  style: PropTypes.object, // eslint-disable-line react/forbid-prop-types
   selectedCity: PropTypes.string,
   onGetCurrentWeatherData: PropTypes.func.isRequired,
   onGetForecastData: PropTypes.func.isRequired

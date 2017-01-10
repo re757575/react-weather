@@ -235,6 +235,7 @@ class App extends Component {
         </Dialog>
         <AppNavDrawer
           style={{}}
+          width={250}
           location={location}
           docked={docked}
           onRequestChangeNavDrawer={this.handleChangeRequestNavDrawer}
