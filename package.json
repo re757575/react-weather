@@ -9,7 +9,9 @@
     "lint": "eslint --cache --ignore-path .gitignore --format=node_modules/eslint-formatter-pretty src test *.js",
     "lint-fix": "npm run lint -- --fix",
     "test": "mocha --compilers js:babel-core/register --recursive -r jsdom-global/register --require ./test/setup.js",
-    "test:watch": "npm test -- --watch"
+    "test:watch": "npm test -- --watch",
+    "storybook": "start-storybook -p 6006",
+    "build-storybook": "build-storybook"
   },
   "repository": {
     "type": "git",
@@ -51,7 +53,8 @@
     "sinon": "^1.17.7",
     "style-loader": "^0.13.1",
     "webpack": "^1.12.2",
-    "webpack-dev-server": "^1.12.1"
+    "webpack-dev-server": "^1.12.1",
+    "@kadira/storybook": "^2.21.0"
   },
   "dependencies": {
     "isomorphic-fetch": "^2.2.1",
